@@ -1,0 +1,118 @@
+import java.util.Arrays;
+
+public class Vector {
+
+	private int[] vector = new int[10];
+	int counter = 0;
+
+	public Vector(int n) {
+		this.vector = new int[n];
+		fill();
+	}
+
+	public void fill() {
+		for (int i = 0; i < vector.length; i++) {
+			vector[i] = (int) (Math.random() * 20 - 10);
+		}
+	}
+
+	public void addition(Vector other) {
+		Integer[] container;
+		container = new Integer[counter];
+		if (counter == other.counter) {
+			for (int i = 0; i < counter; i++) {
+				container[i] = this.vector[i] + other.vector[i];
+			}
+		}
+		for (int i = 0; i < counter; i++) {
+			System.out.println(container[i]);
+		}
+		System.out.println();
+	}
+
+	public void subtraction(Vector other) {
+		Integer[] container;
+		container = new Integer[counter];
+		if (counter == other.counter) {
+			for (int i = 0; i < counter; i++) {
+				container[i] = this.vector[i] - other.vector[i];
+			}
+		}
+		for (int i = 0; i < counter; i++) {
+			System.out.println(container[i]);
+		}
+		System.out.println();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vector other = (Vector) obj;
+		if (!Arrays.equals(vector, other.vector))
+			return false;
+		return true;
+	}
+
+	public String getSize() {
+		return counter + "/" + vector.length;
+	}
+
+	public void print() {
+		for (int i = 0; i < counter; i++) {
+			System.out.println(vector[i]);
+		}
+		System.out.println();
+	}
+
+	//довжина вектора
+	public double lenght(){
+		double value=0;
+		for(int i=0; i<vector.length; i++){
+			value+=vector[i]*vector[i];
+		}
+		return Math.sqrt(value);
+	}
+	
+	public int[] getVector() {
+		return vector;
+	}
+
+	public void setVector(int[] vector) {
+		this.vector = vector;
+	}
+
+	public void get(int index) {
+		System.out.println(vector[index]);
+	}
+
+	public void setValue(int index, int value) {
+		this.vector[index] = value;
+	}
+	
+	@Override
+	public String toString() {
+		String result = "";
+		for (int value : vector) {
+			result +=""+ String.valueOf(value) + " " + "\n";
+		}
+		return result;
+	}
+
+	public Integer dotProduct(Vector other) {
+		Integer result = null;
+		if (vector.length == other.vector.length) {
+			int value = 0;
+			for (int i = 0; i < vector.length; i++) {
+				value += vector[i] * other.vector[i];
+			}
+			result = value;
+		}
+		return result;
+	}
+	
+}
