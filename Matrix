@@ -1,71 +1,84 @@
+package kursova;
+
 import java.util.Arrays;
 
-public class Matrix {	
-	
-	int n;
-	private int[][] matrix;
-	private int[][] container = new int[n][n];
+public class Matrix { 
+ 
+ int n;
+ private int[][] matrix;
+ private int[][] container;
 
-	
-	
+ 
+ 
     public Matrix(int n) {
-    	matrix = new int[n][n];
-    	this.n = n;
-    	fill();
-	}
+     matrix = new int[n][n];
+     container = new int [n][n];
+     this.n = n;
+     fill();
+ }
 
-	public void fill() {
-	    for(int i = 0; i < n; i++){
-	        for(int j = 0; j < n; j++){
-	            matrix[i][j] = (int)(Math.random() * 10+1);
-	        }
-	    }
+    public String print(int[][] matrix) {
+        String result="";
+        for(int i = 0; i < matrix.length; i++){
+             for(int j = 0; j < matrix[0].length; j++){
+                 result += matrix[i][j] + (j == n - 1?"\n":"\t");
+             }
+         }
+        return result;
+    }
+    
+ public void fill() {
+     for(int i = 0; i < n; i++){
+         for(int j = 0; j < n; j++){
+             matrix[i][j] =(int) (Math.random() * 20-10);
+         }
+     }
    }
     
    public void addition(Matrix other) {
-	   System.out.println("Додавання матриць");
-	    for(int i = 0; i < n; i++){
-	        for(int j = 0; j < n; j++){
-	                container[i][j] = matrix[i][j] + other.matrix[i][j];
-	                System.out.print(container[i][j] + (j == n - 1?"\n":"\t"));
-	        }
-	    }	   
+    System.out.println("Додавання матриць");
+     for(int i = 0; i < n; i++){
+         for(int j = 0; j < n; j++){
+                 container[i][j] = matrix[i][j] + other.matrix[i][j];
+         }
+     }
+        System.out.println(print(container));
    }
    
    
    
    public void subtraction(Matrix other) {
-	   System.out.println("Віднімання матриць");
-	    for(int i = 0; i < n; i++){
-	        for(int j = 0; j < n; j++){
-	                container[i][j] = matrix[i][j] - other.matrix[i][j];
-	                System.out.print(container[i][j] + (j == n - 1?"\n":"\t"));
-	        }
-	    }	   
+    System.out.println("Віднімання матриць");
+     for(int i = 0; i < n; i++){
+         for(int j = 0; j < n; j++){
+                 container[i][j] = matrix[i][j] - other.matrix[i][j];
+         }
+     }
+        System.out.println(print(container));
    }
 
    @Override
    public boolean equals(Object obj) {
-	   if (this == obj)
-		   return true;
-	   if (obj == null)
-		   return false;
-	   if (getClass() != obj.getClass())
-		   return false;
-	   Matrix other = (Matrix) obj;
-	   if (!Arrays.deepEquals(matrix, other.matrix))
-		   return false;
-	   return true;
+    if (this == obj)
+     return true;
+    if (obj == null)
+     return false;
+    if (getClass() != obj.getClass())
+     return false;
+    Matrix other = (Matrix) obj;
+    if (!Arrays.deepEquals(matrix, other.matrix))
+     return false;
+    return true;
    }
 
    @Override
    public String toString() {
-	   for(int i = 0; i < matrix.length; i++){
-	        for(int j = 0; j < matrix[0].length; j++){
-	            System.out.print(matrix[i][j] + (j == n - 1?"\n":"\t"));
-	        }
-	    }
-	   return  "";
+    for(int i = 0; i < matrix.length; i++){
+         for(int j = 0; j < matrix[0].length; j++){
+             System.out.print(matrix[i][j] + (j == n - 1?"\n":"\t"));
+         }
+     }
+    return  "";
    }
    
    public Vector matrixToVector(Vector vector) {
@@ -84,107 +97,107 @@ public class Matrix {
        return result;
    }
    
-	public void ob4(Matrix matrix){
-		int matrixa, matrixb, firstrowa, obernenyj, firtsrowb, secondrowa, secondrowb, lastrowa, lastrowb;
-			int k = 0;
-			for (int i = 0; i < n; i++)
-			{
-				for (int j = 0; j < n ; j++)
-				{
-					if (matrix.matrix[i][0] != 0)
-					{
-						k = i;
-						break;
-					}
-					else
-					{
-						System.out.println("A[i, 0]=0");
-					break;
-					}
-				}
-			}
-			int value;
-			int a;
-			for (int i = 0; i < n; i++)
-			{
-				for (int j = 0; j < n ; j++)
-				{
-					if (matrix.matrix[i][0] == 0)
-					{
-						value = i;
-						a = matrix.matrix[i][j];
-						matrix.matrix[i][j] = matrix.matrix[i][j];
-						matrix.matrix[i][j] = a;
-					}
-				}
-			}
-		int perelem = matrix.matrix[0][0];
-			int[][] B = new int[n][n];
-			for (int i = 0; i < n ; i++)
-			{
-				for (int j = 0; j < n ; j++)
-				{
-				firstrowa = matrix.matrix[0][j];
-			firtsrowb = B[0][j];
-				if (i == 0)
-				{
-					matrixb = firstrowa / perelem;
-				B[i][j] = matrixb;
-				}
-			  if (i == 1)
-			  {
-				  obernenyj = firtsrowb * matrix.matrix[i][0];
-				  B[i][j] = matrix.matrix[i][j] - obernenyj;
-			  }
-			  if (i == 2)
-			  {
-				  obernenyj = firtsrowb *matrix.matrix[i][0];
-				  B[i][j] = matrix.matrix[i][j] - obernenyj;
-			  }
-				}
-			}
-			int elem = B[1][1];
-			for (int i = 0; i < n; i++)
-			{
-				for (int j = 0; j < n; j++)
-				{
-					secondrowa = matrix.matrix[1][j];
-					secondrowb = B[1][j];
-					matrix.matrix[i][j] = B[i][j];
-					if (i == 1)
-					{
-						matrixa = secondrowb / elem;
-						matrix.matrix[i][j] = matrixa;
-					}
-					if (i == 2)
-					{
-						obernenyj = secondrowa * B[i][1];
-						matrix.matrix[i][j] = B[i][j] - obernenyj;
-					}
-				}
-			}
-		for (int i = 0; i < n; i++)
-		{
-				 for (int j = 0; j < n; j++)
-				 {
-					 if (i == 2)
-					 {
-						 lastrowa = matrix.matrix[i][j];
-						 B[i][j] = (lastrowa / matrix.matrix[2][2]);
-					 }
-					 if (i == 1)
-					 {
-						 obernenyj = matrix.matrix[i][j] * matrix.matrix[i][2];
-						 B[i][j] = matrix.matrix[i][j] - obernenyj;
-					 }
-					 if (i == 0)
-					 {
-						 obernenyj = matrix.matrix[i][j] * matrix.matrix[i][1];
-						 B[i][j] = matrix.matrix[i][j] - obernenyj;
-					 }
-				 }
-		}
-		System.out.printf("Відповідь :(%1$s;%2$s;%3$s;%4$s)." + "\r\n", B[0][3], B[1][3], B[2][3], B[3][3]);
+ public void ob4(Matrix matrix){
+  int matrixa, matrixb, firstrowa, obernenyj, firtsrowb, secondrowa, secondrowb, lastrowa, lastrowb;
+   int k = 0;
+   for (int i = 0; i < n; i++)
+   {
+    for (int j = 0; j < n ; j++)
+    {
+     if (matrix.matrix[i][0] != 0)
+     {
+      k = i;
+      break;
+     }
+     else
+     {
+      System.out.println("A[i, 0]=0");
+     break;
+     }
+    }
+   }
+   int value;
+   int a;
+   for (int i = 0; i < n; i++)
+   {
+    for (int j = 0; j < n ; j++)
+    {
+     if (matrix.matrix[i][0] == 0)
+     {
+      value = i;
+      a = matrix.matrix[i][j];
+      matrix.matrix[i][j] = matrix.matrix[i][j];
+      matrix.matrix[i][j] = a;
+     }
+    }
+   }
+  int perelem = matrix.matrix[0][0];
+   int[][] B = new int[n][n];
+   for (int i = 0; i < n ; i++)
+   {
+    for (int j = 0; j < n ; j++)
+    {
+    firstrowa = matrix.matrix[0][j];
+   firtsrowb = B[0][j];
+    if (i == 0)
+    {
+     matrixb = firstrowa / perelem;
+    B[i][j] = matrixb;
+    }
+     if (i == 1)
+     {
+      obernenyj = firtsrowb * matrix.matrix[i][0];
+      B[i][j] = matrix.matrix[i][j] - obernenyj;
+     }
+     if (i == 2)
+     {
+      obernenyj = firtsrowb *matrix.matrix[i][0];
+      B[i][j] = matrix.matrix[i][j] - obernenyj;
+     }
+    }
+   }
+   int elem = B[1][1];
+   for (int i = 0; i < n; i++)
+   {
+    for (int j = 0; j < n; j++)
+    {
+     secondrowa = matrix.matrix[1][j];
+     secondrowb = B[1][j];
+     matrix.matrix[i][j] = B[i][j];
+     if (i == 1)
+     {
+      matrixa = secondrowb / elem;
+      matrix.matrix[i][j] = matrixa;
+     }
+     if (i == 2)
+     {
+      obernenyj = secondrowa * B[i][1];
+      matrix.matrix[i][j] = B[i][j] - obernenyj;
+     }
+    }
+   }
+  for (int i = 0; i < n; i++)
+  {
+     for (int j = 0; j < n; j++)
+     {
+      if (i == 2)
+      {
+       lastrowa = matrix.matrix[i][j];
+       B[i][j] = (lastrowa / matrix.matrix[2][2]);
+      }
+      if (i == 1)
+      {
+       obernenyj = matrix.matrix[i][j] * matrix.matrix[i][2];
+       B[i][j] = matrix.matrix[i][j] - obernenyj;
+      }
+      if (i == 0)
+      {
+       obernenyj = matrix.matrix[i][j] * matrix.matrix[i][1];
+       B[i][j] = matrix.matrix[i][j] - obernenyj;
+      }
+     }
+  }
+  System.out.printf("Відповідь :(%1$s;%2$s;%3$s;%4$s)." + "\r\n", B[0][3], B[1][3], B[2][3], B[3][3]);
 }
    
 }
