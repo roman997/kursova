@@ -1,0 +1,24 @@
+package kursova;
+
+public class MainClass {
+
+	 public static void main(String[] args) {
+	  Matrix m1 = new Matrix(4);
+	  Vector v1 = new Vector(4);
+	  Matrix m2 = new Matrix(4);
+	  Vector v2 = new Vector(4);
+	  System.out.println(m2);
+	  System.out.println(m1);
+	  System.out.println(v1);
+	  System.out.println(v2);
+	  System.out.println("Матриця на вектор: "+"\n"+m1.matrixToVector(v1));
+	  System.out.println("Довжина вектра: "+"\n"+v1.lenght());
+	  m1.addition(m2);
+	  m1.subtraction(m2);
+	  System.out.println("Скалярний добуток:"+"\n"+v1.dotProduct(v1));
+	  System.out.println("Додавання векторів:"+"\n"+v1.addition(v2));
+	  System.out.println("Віднімання: "+"\n"+v1.substraction(v2));
+	  System.out.println(v1.equals(v2));
+	  System.out.println(m1.equals(m2));
+	 }
+	}
